@@ -8,7 +8,7 @@
 - 新增考试、年份、难度、来源、学习进度和关键词组合筛选，以及年份、标题排序；无结果时可清除筛选。
 - 练习页可通过「筛选 / 换题」跨考试选择篇目，保留各篇答题草稿和作文。写作、听力也可跨考试练习。
 - 保留来源信息可选、重复批次提醒、题目去重、每批20页PDF与10万字符、临时气泡和温和陪学。
-- 更新启动脚本、使用说明、发行审计和标签触发的 Windows 发布工作流。
+- 更新启动脚本、使用说明及发行审计。发行采用本机打包、直接上传 GitHub Release，不使用 GitHub Actions。
 
 ## 验证
 
@@ -25,7 +25,7 @@
 - 大小：571,623,759字节
 - SHA-256：c1aa59404e7a0450ff71ab39c46c4263c30b6c044c61cd2066583d9aeaf34c60
 - 使用 electron-builder --win portable --x64 --prepackaged release/win-unpacked --publish never --config.compression=store 封装。
-- GitHub Actions 会从版本标签重新构建；远端下载包以随附的 .sha256 文件为准。
+- Release 直接上传本机已验证的便携包及对应 .sha256 校验文件，不在远端重新构建。
 
 ## 已知限制
 
