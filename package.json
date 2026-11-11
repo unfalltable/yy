@@ -1,0 +1,74 @@
+{
+  "name": "lingo-study",
+  "version": "0.6.0",
+  "private": true,
+  "description": "Lingo 伴学 — 本地优先的英语学习桌面应用",
+  "main": "electron/main.cjs",
+  "author": "Lingo Study",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "desktop": "node scripts/dev.cjs",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "pack": "npm run build && electron-builder --win portable --x64",
+    "test:desktop": "node scripts/electron-smoke.cjs",
+    "make:icon": "node scripts/make-icon.cjs",
+    "predev": "node scripts/copy-document-assets.cjs",
+    "prebuild": "node scripts/copy-document-assets.cjs",
+    "test:documents": "node scripts/document-smoke.cjs"
+  },
+  "dependencies": {
+    "@pixiv/three-vrm": "latest",
+    "idb-keyval": "latest",
+    "jszip": "3.10.2",
+    "lucide-react": "latest",
+    "mammoth": "1.13.0",
+    "pdfjs-dist": "6.5.438",
+    "react": "latest",
+    "react-dom": "latest",
+    "three": "latest",
+    "word-extractor": "1.0.4",
+    "zod": "latest",
+    "@pixiv/three-vrm-animation": "3.5.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/three": "latest",
+    "@vitejs/plugin-react": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "pdf-lib": "1.17.1",
+    "prettier": "^3.9.10",
+    "typescript": "latest",
+    "vite": "latest",
+    "vitest": "latest"
+  },
+  "build": {
+    "appId": "com.lingo.study",
+    "productName": "Lingo伴学",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json",
+      "assets/icon.png",
+      "assets/AVATAR-LICENSES.md",
+      "assets/motions/manifest.json"
+    ],
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": false,
+      "icon": "assets/icon.ico"
+    },
+    "portable": {
+      "artifactName": "Lingo-Study-${version}-Windows.exe"
+    },
+    "electronDist": "node_modules/electron/dist"
+  },
+  "type": "module"
+}

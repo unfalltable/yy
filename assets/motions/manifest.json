@@ -1,0 +1,41 @@
+[
+  {
+    "path": "assets/motions/idle-01.vrma",
+    "role": "animation",
+    "creator": "sashii",
+    "license": "CC0 1.0 Universal",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://booth.pm/ja/items/6412084",
+    "attribution": "Sachi VRMA 1 by sashii (credit not required; retained for provenance)",
+    "restrictions": "CC0 1.0; provided as-is without warranty.",
+    "sha256": "5ed6c016df035b21daaefe64751e1356387c6a33693d31366b0912ac7566ea92",
+    "mirror": "https://raw.githubusercontent.com/SanHsien/voxavatar/main/public/assets/animations/idle-01.vrma",
+    "bytes": 95888
+  },
+  {
+    "path": "assets/motions/speaking-01.vrma",
+    "role": "animation",
+    "creator": "sashii",
+    "license": "CC0 1.0 Universal",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://booth.pm/ja/items/6412084",
+    "attribution": "Sachi VRMA 1 by sashii (credit not required; retained for provenance)",
+    "restrictions": "CC0 1.0; provided as-is without warranty.",
+    "sha256": "ba0339d2d9755fc2e0dab06e96a0d91303d0a508c9f89f07dc17a07dc0e2535c",
+    "mirror": "https://raw.githubusercontent.com/SanHsien/voxavatar/main/public/assets/animations/speaking-01.vrma",
+    "bytes": 37208
+  },
+  {
+    "path": "assets/motions/success-cheer.vrma",
+    "role": "animation",
+    "creator": "へすい / rerofumi",
+    "license": "CC0 1.0 Universal",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://booth.pm/ja/items/5527394",
+    "attribution": "VRMA animation pack by へすい / rerofumi (credit not required; retained for provenance)",
+    "restrictions": "CC0 1.0; provided as-is without warranty.",
+    "sha256": "88123be97c20633b926b911c1904aae3cdc790c5416b39788b753749ba087afb",
+    "mirror": "https://raw.githubusercontent.com/SanHsien/voxavatar/main/public/assets/animations/success-cheer.vrma",
+    "bytes": 559496
+  }
+]

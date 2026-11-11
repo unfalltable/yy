@@ -1,0 +1,12 @@
+node_modules/
+dist/
+release/
+test-results/
+playwright-report/
+.tools/
+*.log
+*.tsbuildinfo
+public/pdf/
+.env
+.env.*
+!.env.example

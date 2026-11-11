@@ -1,0 +1,11 @@
+{
+  "fileBytes": 20000000,
+  "pdfPages": 20,
+  "images": 6,
+  "textChars": 100000,
+  "batchImageChars": 8000000,
+  "imageChars": 4000000,
+  "maxItems": 6,
+  "maxQuestions": 30,
+  "aiPromptChars": 120000
+}

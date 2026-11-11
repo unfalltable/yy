@@ -1,0 +1,58 @@
+name: Windows release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Check version and release state
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = (Get-Content package.json -Raw | ConvertFrom-Json).version
+          $tag = "v$version"
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne $tag) {
+            throw "Tag must match package.json version"
+          }
+          if ($env:GITHUB_REF_TYPE -ne 'tag') {
+            throw "Run this workflow from a version tag"
+          }
+          $existing = gh release list --repo $env:GITHUB_REPOSITORY --json tagName | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw "Cannot check existing releases" }
+          if ($existing.tagName -contains $tag) { throw "Release already exists; inspect it before retrying" }
+          "RELEASE_VERSION=$version" >> $env:GITHUB_ENV
+          "RELEASE_TAG=$tag" >> $env:GITHUB_ENV
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Package Windows portable app
+        run: npx electron-builder --win portable --x64 --publish never --config.compression=store
+      - run: node scripts/audit-release.cjs
+      - name: Publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $file = "release/Lingo-Study-$env:RELEASE_VERSION-Windows.exe"
+          $hash = (Get-FileHash -Algorithm SHA256 $file).Hash.ToLower()
+          "$hash  $(Split-Path $file -Leaf)" | Set-Content -Encoding utf8NoBOM "$file.sha256"
+          gh release create $env:RELEASE_TAG $file "$file.sha256" --verify-tag --repo $env:GITHUB_REPOSITORY --title "Lingo 伴学 $env:RELEASE_VERSION" --notes-file "docs/RELEASE-$env:RELEASE_VERSION.md"
+          if ($LASTEXITCODE -ne 0) { throw "Release publication failed; inspect remote state before retrying" }
